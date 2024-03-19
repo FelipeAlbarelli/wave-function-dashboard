@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { ImageModule } from 'primeng/image';
 import { TileModel } from '../../store/tiles';
 
@@ -13,5 +13,7 @@ export class TileComponent {
 
 
   item = input.required<TileModel>()
+
+  selected = output<TileModel>()
 
 }

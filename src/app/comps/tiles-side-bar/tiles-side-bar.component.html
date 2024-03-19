@@ -2,6 +2,7 @@
     @for (item of store.tiles(); track $index) {
         <app-tile
             [item]="item"
+            (selected)="log($event)"
         ></app-tile>
     }
     <p-fileUpload
