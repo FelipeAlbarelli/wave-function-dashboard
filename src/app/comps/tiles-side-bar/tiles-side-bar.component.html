@@ -1,4 +1,9 @@
 <div class="container">
+    @for (item of files(); track $index) {
+        <p-image 
+            [src]="item.url" alt="Image" height="150" >
+        </p-image>
+    }
     <p-fileUpload
         #fileBtn
         mode="basic" 
