@@ -1,9 +1,23 @@
 <div class="container">
-    <p-image 
+    <!-- <p-image 
         [src]="item().url" 
         (click)="selected.emit(item())"
         alt="Image" 
-        height="150" >
+        height="150" 
+        #img
+        >
 
-    </p-image>
+    </p-image> -->
+    <img 
+        [src]="item().url"
+        (click)="selected.emit(item())"
+        alt="Image" 
+        height="150" 
+        #img
+    >
+    <p-contextMenu
+        [target]="img" 
+        [model]="items"
+        >
+    </p-contextMenu>
 </div>

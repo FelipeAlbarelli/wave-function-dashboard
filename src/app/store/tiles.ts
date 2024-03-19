@@ -1,49 +1,62 @@
 import { computed, effect } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState, withHooks } from '@ngrx/signals';
+import { addEntity, withEntities } from '@ngrx/signals/entities';
 import { retrieveFilesFromStorage, saveFilesToStorage } from './base64';
-
+import { v4 as uuidv4 } from 'uuid';
 
 export type TileModel = {
     file: File | Blob,
     size: number,
-    url: string
+    url: string,
+    id: string
 }
+
+export type NewTileModel = Omit<TileModel, 'id'>
 
 export type TileStoreState = {
     tiles: TileModel[],
-    selectedIndex: number | null 
+    selectedUuid: string | null 
 }
 
 const initialState: TileStoreState = {
   tiles:  [],
-  selectedIndex: null
+  selectedUuid: null
 };
+
 
 export const TileStore = signalStore(
   withState(initialState),
   withComputed((store) => ({
     selected: computed( () => {
-        if (store.selectedIndex() == null) {
+        if (store.selectedUuid() == null) {
             return null
         }
-        return store.tiles()[store.selectedIndex()!]
+        return store.tiles().find( ({id}) => store.selectedUuid() == id )
     })
   })),
   withMethods( (store ) => ({
-    addTile(toAdd: TileModel) {
+    addNewTile(toAdd: NewTileModel) {
         patchState(store , state => ({
             ...state,
             tiles: [
                 ...state.tiles,
-                toAdd
+                {
+                    ...toAdd,
+                    id: uuidv4()
+                }
             ]
         }))
-        saveFilesToStorage(store.tiles().map(f => f.file))
     },
-    selectTile(tile: number) {
+    selectTile(uuid: string) {
         patchState(store , {
-            selectedIndex: tile
+            selectedUuid: uuid
         })
+    },
+    deleteTile(tile: TileModel) {
+        patchState(store , (state) => ({
+            ...state,
+            tiles: state.tiles.filter( ({id}) => id !== tile.id )
+        }))
     }
   })),
   withHooks(({
@@ -61,7 +74,8 @@ export const TileStore = signalStore(
                 return {
                     file: f,
                     size: f.size,
-                    url
+                    url,
+                    id: uuidv4()
                 }
             })
         })
@@ -69,4 +83,5 @@ export const TileStore = signalStore(
     },
   }))
 );
+
 

@@ -7,6 +7,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { TilesSideBarComponent } from '../tiles-side-bar/tiles-side-bar.component';
 import { TileStore } from '../../store/tiles';
 import base64 from 'base64-encode-file'
+import { saveFilesToStorage } from '../../store/base64';
 
 
 
@@ -22,6 +23,10 @@ export class AssistenteDashboardComponent {
 
   readonly store = inject(TileStore);
 
+  saveAllTilesToStorage = effect( () => {
+    saveFilesToStorage(this.store.tiles().map(f => f.file))
+    console.log('storage atualizado!')
 
+  })
 
 }

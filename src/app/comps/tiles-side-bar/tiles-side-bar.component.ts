@@ -27,17 +27,6 @@ function blobToBase64(blob: File) {
 })
 export class TilesSideBarComponent {
 
-
-  log(event: TileModel) {
-    throw new Error('Method not implemented.');
-  }
-
-  // fileBtn = contentChild<FileUpload>(FileUpload)
-
-  // e = effect( () => {
-  //   console.log(this.fileBtn())
-  // })
-
   readonly store = inject(TileStore);
 
 
@@ -54,7 +43,7 @@ export class TilesSideBarComponent {
     console.log(base64)
 
 
-    this.store.addTile({
+    this.store.addNewTile({
       url, 
       file,
       size: file.size
@@ -63,6 +52,15 @@ export class TilesSideBarComponent {
     return
   }
 
+  select(tile: TileModel) {
+    console.log({tile})
+  }
+
+
+  async deleteTile(tileToDelete: TileModel) {
+      // console.log({tileToDelete})
+      this.store.deleteTile(tileToDelete)
+  }
 
 
 }

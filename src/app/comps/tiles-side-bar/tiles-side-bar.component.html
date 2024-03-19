@@ -2,7 +2,8 @@
     @for (item of store.tiles(); track $index) {
         <app-tile
             [item]="item"
-            (selected)="log($event)"
+            (selected)="select($event)"
+            (delete)="deleteTile($event)"
         ></app-tile>
     }
     <p-fileUpload
