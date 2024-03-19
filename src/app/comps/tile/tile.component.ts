@@ -1,6 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { ImageModule } from 'primeng/image';
-import { TileModel } from '../../store/tiles';
+import { TileModel, TileStore } from '../../store/tiles';
 
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
@@ -12,6 +12,7 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './tile.component.scss'
 })
 export class TileComponent {
+  readonly store = inject(TileStore);
 
 
   item = input.required<TileModel>()
@@ -19,6 +20,11 @@ export class TileComponent {
   selected = output<TileModel>()
 
   delete = output<TileModel>()
+
+  isSelected = computed( () => {
+    const selectedId = this.store.selectedUuid()
+    return this.item().id == selectedId
+  })
 
   items: MenuItem[] = [
     // { 

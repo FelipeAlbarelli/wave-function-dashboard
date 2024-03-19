@@ -57,7 +57,7 @@ export class TilesSideBarComponent {
   }
 
   select(tile: TileModel) {
-    console.log({tile})
+    this.store.selectTile(tile)
   }
 
 

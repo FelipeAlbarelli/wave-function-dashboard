@@ -47,10 +47,16 @@ export const TileStore = signalStore(
             ]
         }))
     },
-    selectTile(uuid: string) {
-        patchState(store , {
-            selectedUuid: uuid
-        })
+    selectTile(selected: string | TileModel) {
+        if (typeof selected == 'string'){
+            patchState(store , {
+                selectedUuid: selected
+            })
+        } else {
+            patchState(store , {
+                selectedUuid: selected.id
+            })
+        }
     },
     deleteTile(tile: TileModel) {
         patchState(store , (state) => ({
