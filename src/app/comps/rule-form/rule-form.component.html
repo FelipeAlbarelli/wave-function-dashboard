@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row h">
+        <p-colorPicker [(ngModel)]="color"></p-colorPicker> 
+        <p>
+            {{color()}}
+        </p>
+    </div>
+    <div class="row" >
+        <label for="label">Label</label>
+        <input  class="p-inputtext-sm"  pInputText id="label"  [(ngModel)]="label" />
+    </div>
+    <p-button 
+        [label]="btnLabel()" 
+        [outlined]="true"
+        [disabled]="false"
+        (onClick)="add()"
+    ></p-button>
+    
+</div>
+
+

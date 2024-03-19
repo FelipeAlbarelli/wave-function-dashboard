@@ -9,3 +9,11 @@ img{
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
 }
+
+
+// global vars
+:root {
+    --main-side-bar-width: 230px;
+    --main-side-bar-height: 600px;
+    
+}

@@ -1,0 +1,13 @@
+.container {
+    width: var(--main-side-bar-width);
+}
+
+.content {
+    height: var(--main-side-bar-height);
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+}
+

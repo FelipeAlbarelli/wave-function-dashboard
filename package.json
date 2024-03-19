@@ -18,6 +18,7 @@
     "base64-encode-file": "^1.0.7",
     "blob-util": "^2.0.2",
     "browser-cache-blob-store": "^1.1.1",
+    "immer": "^10.0.4",
     "lodash": "^4.17.21",
     "primeicons": "^6.0.1",
     "primeng": "^17.11.0",
