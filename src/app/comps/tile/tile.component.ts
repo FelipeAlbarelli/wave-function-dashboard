@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { ImageModule } from 'primeng/image';
-import { TileModel } from '../tiles-side-bar/tiles-side-bar.component';
+import { TileModel } from '../../store/tiles';
 
 @Component({
   selector: 'app-tile',

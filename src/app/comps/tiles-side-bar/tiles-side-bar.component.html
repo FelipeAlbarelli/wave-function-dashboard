@@ -1,5 +1,5 @@
 <div class="container">
-    @for (item of files(); track $index) {
+    @for (item of store.tiles(); track $index) {
         <app-tile
             [item]="item"
         ></app-tile>

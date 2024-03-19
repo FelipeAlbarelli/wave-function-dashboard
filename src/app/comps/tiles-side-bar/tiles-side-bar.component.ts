@@ -1,14 +1,11 @@
-import { Component, contentChild, effect, signal } from '@angular/core';
+import { Component, contentChild, effect, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FileUpload, FileUploadEvent, FileUploadHandlerEvent, FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { TileComponent } from '../tile/tile.component';
+import { TileModel, TileStore } from '../../store/tiles';
 
-export type TileModel = {
-  file: File,
-  size: number,
-  url: string
-}
+
 
 @Component({
   selector: 'app-tiles-side-bar',
@@ -25,6 +22,8 @@ export class TilesSideBarComponent {
   //   console.log(this.fileBtn())
   // })
 
+  readonly store = inject(TileStore);
+
   files = signal<TileModel[]>([])
 
   onUpload(event: FileUploadHandlerEvent , ele: FileUpload) {
@@ -36,6 +35,11 @@ export class TilesSideBarComponent {
       file,
       size: file.size
     }]) )
+    this.store.addTile({
+      url, 
+      file,
+      size: file.size
+    })
     ele.clear()
     return
   }
