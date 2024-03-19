@@ -9,7 +9,8 @@
     <p-fileUpload
         #fileBtn
         mode="basic" 
-        chooseLabel="Adicionar" 
+        chooseLabel="Adicionar"
+        [multiple]="true"
         name="add" 
         accept="image/*" 
         (uploadHandler)="onUpload($event , fileBtn)"

@@ -29,16 +29,14 @@ export class TilesSideBarComponent {
 
   readonly store = inject(TileStore);
 
-
-  async onUpload(event: FileUploadHandlerEvent , ele: FileUpload) {
-    const file = event.files[0] 
+  async addSingleFile(file: File) {
     const url = URL.createObjectURL(file)
 
     console.log(file)
 
 
 
-    const re =await blobToBase64(file);
+    const re = await blobToBase64(file);
     const base64 = await blobToBase64String(file)
     console.log(base64)
 
@@ -48,6 +46,12 @@ export class TilesSideBarComponent {
       file,
       size: file.size
     })
+  }
+
+  async onUpload(event: FileUploadHandlerEvent , ele: FileUpload) {
+    const filesP = event.files.map( file => this.addSingleFile(file) )
+    
+    await Promise.all(filesP)
     ele.clear()
     return
   }
