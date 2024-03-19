@@ -1,1 +1,13 @@
-<p>tiles-side-bar works!</p>
+<div class="container">
+    <p-fileUpload
+        #fileBtn
+        mode="basic" 
+        chooseLabel="Adicionar" 
+        name="add" 
+        accept="image/*" 
+        (uploadHandler)="onUpload($event , fileBtn)"
+        [customUpload]="true"
+        [auto]="true"
+        >
+    </p-fileUpload>
+</div>
